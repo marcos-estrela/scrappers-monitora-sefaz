@@ -3,12 +3,10 @@
 # TODO: Salvar estrutura com horário
 
 import scrapy
-# import os
 import pymongo
 from decouple import config
 
 statusAtual = {}
-
 
 class ScraperSefaz(scrapy.Spider):
     name = 'scrape-table'
@@ -28,7 +26,6 @@ class ScraperSefaz(scrapy.Spider):
         client = pymongo.MongoClient(api)
         db = client['monitora-sefaz']
         collection = db['current_status']
-        # objStatus = db.current_status
 
         for linha in response.xpath('//*[@class="linhaImparCentralizada" or @class="linhaParCentralizada"]'):
             estado = linha.xpath('td//text()')[0].extract()
